@@ -1,60 +1,29 @@
 require 'spec_helper'
 
-basic_title = 'RoR Tut App'
-
 describe "Static pages" do
 
+  subject { page }
+  
   describe "Home page" do
+    before { visit root_path }
 
-    it "should have title 'Home'" do
-      visit root_path
-      page.should have_selector('h1', :text =>'home')
-    end
-
-    it "should have base title 'Home'" do
-      visit root_path
-      page.should have_selector('title', :text =>'RoR Tut App')
-    end
-
-    it "should have custom title 'Home'" do
-      visit root_path
-      page.should have_selector('title', :text =>'| home')
-    end
+    it { should have_selector('h1', :text =>'home') }
+    it { should have_selector('title', text: full_title('home')) }
 
   end
+
   describe "Help page" do
+    before { visit help_path }
 
-    it "should have title 'Help'" do
-      visit help_path
-      page.should have_selector('h1', :text =>'help')
-    end
-
-    it "should have base title 'Help'" do
-      visit help_path
-      page.should have_selector('title', :text =>'RoR Tut App')
-    end
-
-    it "should have custom title 'Help'" do
-      visit help_path
-      page.should have_selector('title', :text =>'| help')
-    end
+    it { should have_selector('h1', :text =>'help') }
+    it { should have_selector('title', text: full_title('help')) }
 
   end
 
   describe "Contact page" do
-    it "should have title 'Contact'" do
-      visit contact_path
-      page.should have_selector('h1', :text =>'contact')
-    end
+    before { visit contact_path }
 
-    it "should have base title 'Contact'" do
-      visit contact_path
-      page.should have_selector('title', :text =>'RoR Tut App')
-    end
-
-    it "should have custom title 'Contact'" do
-      visit contact_path
-      page.should have_selector('title', :text =>'| contact')
-    end
+    it { should have_selector('h1', text: 'contact') }
+    it { should have_selector('title', text: full_title('contact')) }
   end
 end
